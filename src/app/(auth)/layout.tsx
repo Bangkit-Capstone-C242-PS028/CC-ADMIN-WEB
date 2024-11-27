@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DermaScan: Login",
+  description: "DermaScan: Login",
+};
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <div>{children}</div>;
 }
