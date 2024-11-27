@@ -1,7 +1,28 @@
 # DermaScan Admin Dashboard
 
-A Next.js admin dashboard.
+A web application for managing and verifying doctor registrations.
 
+## Features
+
+- **Doctor Verification Dashboard**
+  - View pending doctor registrations
+  - Filter doctors by document status
+  - Approve doctors with document verification
+  - Paginated list view
+  - Real-time updates after approval
+
+- **Authentication**
+  - Secure admin login
+  - Protected routes
+  - Firebase Authentication
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Database**: MySQL with Drizzle ORM
+- **Authentication**: Firebase Auth
+- **UI Components**: shadcn/ui
+- **Styling**: Tailwind CSS
 
 ## Prerequisites
 
@@ -56,14 +77,6 @@ After deployment, set your environment variables in Cloud Run:
 3. Select your service
 4. Click "Edit & Deploy New Revision"
 5. Add your environment variables under "Variables & Secrets"
-
-## Tech Stack
-
-- Next.js 14
-- Firebase Authentication
-- TypeScript
-- Tailwind CSS
-- Shadcn UI
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
