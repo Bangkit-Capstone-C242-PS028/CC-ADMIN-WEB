@@ -6,5 +6,10 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
+
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      {children}
+    </div>
+  );
 }
