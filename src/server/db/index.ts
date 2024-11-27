@@ -8,12 +8,12 @@ dotenv.config({
 });
 
 const poolConnection = mysql.createPool({
-  host: process.env.ENV === "prod" ? undefined : process.env.DB_HOST!,
+  host: process.env.ENV === "prod" ? undefined : process.env.DB_HOST,
   socketPath:
-    process.env.ENV === "prod" ? process.env.DB_SOCKET_PATH! : undefined,
-  user: process.env.DB_USERNAME!,
-  password: process.env.DB_PASSWORD!,
-  database: process.env.DB_NAME!,
+    process.env.ENV === "prod" ? process.env.DB_SOCKET_PATH : undefined,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 const db = drizzle({ client: poolConnection });
 
