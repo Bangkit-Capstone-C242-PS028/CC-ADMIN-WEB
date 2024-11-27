@@ -1,0 +1,882 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "5",
+  "dialect": "mysql",
+  "tables": {
+    "articles": {
+      "name": "articles",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "autoincrement": false,
+          "name": "content",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "(CURRENT_TIMESTAMP)",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "(CURRENT_TIMESTAMP)",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "authorUid": {
+          "autoincrement": false,
+          "name": "authorUid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "articles_id": {
+          "name": "articles_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "FK_977f5b85c7caa20393be77b4103": {
+          "name": "FK_977f5b85c7caa20393be77b4103",
+          "tableFrom": "articles",
+          "tableTo": "doctors",
+          "columnsFrom": [
+            "authorUid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "consultation_messages": {
+      "name": "consultation_messages",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(36)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "autoincrement": false,
+          "name": "content",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sentAt": {
+          "autoincrement": false,
+          "name": "sentAt",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "consultationId": {
+          "autoincrement": false,
+          "name": "consultationId",
+          "type": "varchar(36)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "senderUid": {
+          "autoincrement": false,
+          "name": "senderUid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "consultation_messages_id": {
+          "name": "consultation_messages_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "FK_9f864948beb2f9d18c0191662da": {
+          "name": "FK_9f864948beb2f9d18c0191662da",
+          "tableFrom": "consultation_messages",
+          "tableTo": "consultations",
+          "columnsFrom": [
+            "consultationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "FK_fa84418f6920f7d70b2b13f257e": {
+          "name": "FK_fa84418f6920f7d70b2b13f257e",
+          "tableFrom": "consultation_messages",
+          "tableTo": "users",
+          "columnsFrom": [
+            "senderUid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "consultations": {
+      "name": "consultations",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(36)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "default": "'pending'",
+          "autoincrement": false,
+          "name": "status",
+          "type": "enum('pending','accepted','declined','completed')",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "requestedAt": {
+          "autoincrement": false,
+          "name": "requestedAt",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "acceptedAt": {
+          "autoincrement": false,
+          "name": "acceptedAt",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "completedAt": {
+          "autoincrement": false,
+          "name": "completedAt",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "doctorUid": {
+          "autoincrement": false,
+          "name": "doctorUid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "patientUid": {
+          "autoincrement": false,
+          "name": "patientUid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "consultations_id": {
+          "name": "consultations_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "FK_1fd2f0ab5d896a334b21e228862": {
+          "name": "FK_1fd2f0ab5d896a334b21e228862",
+          "tableFrom": "consultations",
+          "tableTo": "doctors",
+          "columnsFrom": [
+            "doctorUid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "FK_fe6a098ff50def8c697fad21b00": {
+          "name": "FK_fe6a098ff50def8c697fad21b00",
+          "tableFrom": "consultations",
+          "tableTo": "patients",
+          "columnsFrom": [
+            "patientUid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "doctors": {
+      "name": "doctors",
+      "columns": {
+        "uid": {
+          "autoincrement": false,
+          "name": "uid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "specialization": {
+          "autoincrement": false,
+          "name": "specialization",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "workplace": {
+          "autoincrement": false,
+          "name": "workplace",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {
+        "doctors_uid": {
+          "name": "doctors_uid",
+          "columns": [
+            "uid"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "favorites": {
+      "name": "favorites",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "(CURRENT_TIMESTAMP(6))",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "datetime(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "articleId": {
+          "autoincrement": false,
+          "name": "articleId",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "userUid": {
+          "autoincrement": false,
+          "name": "userUid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "favorites_id": {
+          "name": "favorites_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "FK_a9e25be94f65c6f11f420d97bca": {
+          "name": "FK_a9e25be94f65c6f11f420d97bca",
+          "tableFrom": "favorites",
+          "tableTo": "articles",
+          "columnsFrom": [
+            "articleId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "FK_eed380a15b39342036e3cc038e8": {
+          "name": "FK_eed380a15b39342036e3cc038e8",
+          "tableFrom": "favorites",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userUid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {
+        "IDX_f491100ac21299363d1c347f8d": {
+          "name": "IDX_f491100ac21299363d1c347f8d",
+          "columns": [
+            "articleId",
+            "userUid"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "forum_replies": {
+      "name": "forum_replies",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "responder_role": {
+          "autoincrement": false,
+          "name": "responder_role",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "autoincrement": false,
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "(CURRENT_TIMESTAMP(6))",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "datetime(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "(CURRENT_TIMESTAMP(6))",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "datetime(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "responderUid": {
+          "autoincrement": false,
+          "name": "responderUid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "forumId": {
+          "autoincrement": false,
+          "name": "forumId",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "forum_replies_id": {
+          "name": "forum_replies_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "FK_2016644a33983631468fe17679a": {
+          "name": "FK_2016644a33983631468fe17679a",
+          "tableFrom": "forum_replies",
+          "tableTo": "users",
+          "columnsFrom": [
+            "responderUid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "FK_77c6f888e9d1725d03e86ad9cc4": {
+          "name": "FK_77c6f888e9d1725d03e86ad9cc4",
+          "tableFrom": "forum_replies",
+          "tableTo": "forums",
+          "columnsFrom": [
+            "forumId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "forums": {
+      "name": "forums",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "autoincrement": false,
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "default": "'open'",
+          "autoincrement": false,
+          "name": "status",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "(CURRENT_TIMESTAMP(6))",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "datetime(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "(CURRENT_TIMESTAMP(6))",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "datetime(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "patientUid": {
+          "autoincrement": false,
+          "name": "patientUid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "doctorUid": {
+          "autoincrement": false,
+          "name": "doctorUid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "forums_id": {
+          "name": "forums_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "FK_2254adc3a48d7b473cf98e3bc61": {
+          "name": "FK_2254adc3a48d7b473cf98e3bc61",
+          "tableFrom": "forums",
+          "tableTo": "patients",
+          "columnsFrom": [
+            "patientUid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "FK_b3a4b34ce38f8432ce44b834187": {
+          "name": "FK_b3a4b34ce38f8432ce44b834187",
+          "tableFrom": "forums",
+          "tableTo": "doctors",
+          "columnsFrom": [
+            "doctorUid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "patients": {
+      "name": "patients",
+      "columns": {
+        "uid": {
+          "autoincrement": false,
+          "name": "uid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {
+        "patients_uid": {
+          "name": "patients_uid",
+          "columns": [
+            "uid"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "skin_lesions": {
+      "name": "skin_lesions",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "originalImageUrl": {
+          "autoincrement": false,
+          "name": "originalImageUrl",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "processedImageUrl": {
+          "autoincrement": false,
+          "name": "processedImageUrl",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "default": "'PENDING'",
+          "autoincrement": false,
+          "name": "status",
+          "type": "enum('PENDING','COMPLETED','FAILED')",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "classification": {
+          "autoincrement": false,
+          "name": "classification",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "default": "(CURRENT_TIMESTAMP(6))",
+          "autoincrement": false,
+          "name": "createdAt",
+          "type": "datetime(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "processedAt": {
+          "autoincrement": false,
+          "name": "processedAt",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "patientUid": {
+          "autoincrement": false,
+          "name": "patientUid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "skin_lesions_id": {
+          "name": "skin_lesions_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "FK_e011bf7f687a1795b17e5cbef2e": {
+          "name": "FK_e011bf7f687a1795b17e5cbef2e",
+          "tableFrom": "skin_lesions",
+          "tableTo": "patients",
+          "columnsFrom": [
+            "patientUid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "users": {
+      "name": "users",
+      "columns": {
+        "uid": {
+          "autoincrement": false,
+          "name": "uid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "autoincrement": false,
+          "name": "role",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "autoincrement": false,
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "firstName": {
+          "autoincrement": false,
+          "name": "firstName",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lastName": {
+          "autoincrement": false,
+          "name": "lastName",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dob": {
+          "autoincrement": false,
+          "name": "dob",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address": {
+          "autoincrement": false,
+          "name": "address",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "autoincrement": false,
+          "name": "createdAt",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updatedAt": {
+          "autoincrement": false,
+          "name": "updatedAt",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "points": {
+          "autoincrement": false,
+          "name": "points",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "doctorUid": {
+          "autoincrement": false,
+          "name": "doctorUid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "patientUid": {
+          "autoincrement": false,
+          "name": "patientUid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "users_uid": {
+          "name": "users_uid",
+          "columns": [
+            "uid"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "FK_7ec81db8eabecd3969b50d9098e": {
+          "name": "FK_7ec81db8eabecd3969b50d9098e",
+          "tableFrom": "users",
+          "tableTo": "doctors",
+          "columnsFrom": [
+            "doctorUid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "FK_9d0f3432b1dbedfdafd76668835": {
+          "name": "FK_9d0f3432b1dbedfdafd76668835",
+          "tableFrom": "users",
+          "tableTo": "patients",
+          "columnsFrom": [
+            "patientUid"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {
+        "REL_7ec81db8eabecd3969b50d9098": {
+          "name": "REL_7ec81db8eabecd3969b50d9098",
+          "columns": [
+            "doctorUid"
+          ]
+        },
+        "REL_9d0f3432b1dbedfdafd7666883": {
+          "name": "REL_9d0f3432b1dbedfdafd7666883",
+          "columns": [
+            "patientUid"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    }
+  },
+  "views": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {
+      "articles": {
+        "columns": {
+          "created_at": {
+            "isDefaultAnExpression": true
+          },
+          "updated_at": {
+            "isDefaultAnExpression": true
+          }
+        }
+      },
+      "favorites": {
+        "columns": {
+          "created_at": {
+            "isDefaultAnExpression": true
+          }
+        }
+      },
+      "forum_replies": {
+        "columns": {
+          "created_at": {
+            "isDefaultAnExpression": true
+          },
+          "updated_at": {
+            "isDefaultAnExpression": true
+          }
+        }
+      },
+      "forums": {
+        "columns": {
+          "created_at": {
+            "isDefaultAnExpression": true
+          },
+          "updated_at": {
+            "isDefaultAnExpression": true
+          }
+        }
+      },
+      "skin_lesions": {
+        "columns": {
+          "createdAt": {
+            "isDefaultAnExpression": true
+          }
+        }
+      }
+    },
+    "indexes": {}
+  }
+}
