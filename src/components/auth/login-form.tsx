@@ -18,7 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Alert, AlertTitle } from "../ui/alert";
-import { auth } from "@/app/firebase/config";
+import { auth } from "@/lib/firebase";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
 

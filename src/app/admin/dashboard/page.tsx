@@ -1,22 +1,10 @@
-"use client";
-
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/app/firebase/config";
-import { redirect } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { signOut } from "firebase/auth";
+import LogoutButton from "@/components/auth/logout-button";
 
 export default function Dashboard() {
-  const [user] = useAuthState(auth);
-  if (!user) {
-    redirect("/login");
-  }
-  console.log(user);
-
   return (
     <>
-      <Button onClick={() => signOut(auth)}>Logout</Button>
-      <div>Dashboard</div>
+      <LogoutButton />
+      <h1>Dashboard</h1>
     </>
   );
 }
