@@ -1,6 +1,6 @@
 "use server";
 
-import { and, eq, sql } from "drizzle-orm";
+import { and, asc, eq, sql } from "drizzle-orm";
 import db from "../db";
 import { doctors, users } from "../db/schema";
 
@@ -51,6 +51,7 @@ export const DoctorsAction = async (
     .from(doctors)
     .leftJoin(users, eq(doctors.uid, users.uid))
     .where(whereConditions.length ? and(...whereConditions) : undefined)
+    .orderBy(asc(doctors.isVerified), asc(users.createdAt))
     .limit(limit)
     .offset(offset);
 

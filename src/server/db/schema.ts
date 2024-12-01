@@ -27,6 +27,7 @@ export const articles = mysqlTable(
     authorUid: varchar({ length: 255 }).references(() => doctors.uid, {
       onDelete: "cascade",
     }),
+    imageUrl: varchar({ length: 255 }),
   },
   (table) => {
     return {
@@ -93,6 +94,7 @@ export const doctors = mysqlTable(
     workplace: varchar({ length: 255 }).notNull(),
     documentUrl: varchar({ length: 255 }),
     isVerified: tinyint().default(0).notNull(),
+    whatsappUrl: varchar({ length: 255 }).notNull(),
   },
   (table) => {
     return {
