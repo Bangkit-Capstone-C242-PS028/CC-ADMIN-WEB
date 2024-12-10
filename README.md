@@ -5,6 +5,7 @@ A web application for managing and verifying doctor registrations.
 ## Features
 
 - **Doctor Verification Dashboard**
+
   - View pending doctor registrations
   - Filter doctors by document status
   - Approve doctors with document verification
@@ -23,6 +24,7 @@ A web application for managing and verifying doctor registrations.
 - **Authentication**: Firebase Auth
 - **UI Components**: shadcn/ui
 - **Styling**: Tailwind CSS
+- **Deployment**: Google Cloud Run
 
 ## Prerequisites
 
@@ -32,16 +34,18 @@ A web application for managing and verifying doctor registrations.
 
 ## Environment Variables
 
-Create a `.env.local` file based on `.env.local.sample`:
+Create a `.env` file based on `.env.sample`:
 
 ## Local Development
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -49,12 +53,14 @@ npm run dev
 ## Deploying to Cloud Run
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/Bangkit-Capstone-C242-PS028/CC-ADMIN-WEB
 cd CC-ADMIN-WEB
 ```
 
 ### 2. Create Dockerfile
+
 Create a `Dockerfile` based on `Dockerfile.sample` because Cloud Build can't access Cloud Run environment variables when building the image (environment variables that need to be accessed during `npm run build`).
 
 ### 3. Deploy to Cloud Run
@@ -64,19 +70,10 @@ gcloud run deploy --source .
 ```
 
 This command will:
+
 1. Build your container image
 2. Push it to Google Container Registry
 3. Deploy it to Cloud Run
-
-### Environment Variables in Cloud Run
-
-After deployment, set your environment variables in Cloud Run:
-
-1. Go to Google Cloud Console
-2. Navigate to Cloud Run
-3. Select your service
-4. Click "Edit & Deploy New Revision"
-5. Add your environment variables under "Variables & Secrets"
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
